@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addCartItem } from '../../features/cart/cartSlice';
 import { RootState } from '../../app/store';
 
 export const PageBooks = () => {
@@ -12,12 +11,13 @@ export const PageBooks = () => {
 			<div className="books">
 				{books.map((book) => {
 					return (
-						<div className="book" key={book.id}>
+						<div onClick={() => dispatch({type: 'cart/addCartItem', payload: {book}})} className="book" key={book.id}>
 							<img src={`images/${book.idCode}.jpg`} />
 						</div>
 					);
 				})}
 			</div>
+			<p className="message">You have {cartItems.length} items in your cart.</p>
 		</div>
 	);
 };
